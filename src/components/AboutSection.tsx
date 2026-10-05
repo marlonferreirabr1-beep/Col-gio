@@ -25,7 +25,7 @@ export const AboutSection: React.FC = () => {
       </div>
 
       {/* 5 Modern Cards with 3D embossed icon badges */}
-      <div className="space-y-3.5 pt-2">
+      <div className="space-y-3 pt-1">
         {WHY_CHOOSE_US.map((feature: SchoolFeature) => {
           const isExpanded = expandedId === feature.id;
 
@@ -44,11 +44,11 @@ export const AboutSection: React.FC = () => {
                     <span className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">{feature.icon}</span>
                   </div>
 
-                  <div className="min-w-0">
-                    <h3 className="text-sm sm:text-base font-bold text-white tracking-tight flex items-center gap-1.5 truncate">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-sm sm:text-base font-bold text-white tracking-tight leading-snug">
                       {feature.title}
                     </h3>
-                    <p className="text-xs text-slate-300 truncate">
+                    <p className="text-xs text-slate-300 leading-snug mt-0.5">
                       {feature.subtitle}
                     </p>
                   </div>
@@ -62,7 +62,7 @@ export const AboutSection: React.FC = () => {
 
               {/* Collapsible Content */}
               {isExpanded && (
-                <div className="px-4 pb-4 pt-1 border-t border-white/10 text-xs sm:text-sm text-slate-300 space-y-3 animate-in fade-in duration-200">
+                <div className="px-4 pb-4 pt-1 border-t border-white/10 text-xs sm:text-sm text-slate-300 space-y-2.5 animate-in fade-in duration-200">
                   <p className="leading-relaxed text-slate-200">
                     {feature.description}
                   </p>

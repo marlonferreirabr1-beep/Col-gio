@@ -42,13 +42,13 @@ export const InstagramSection: React.FC = () => {
               Acompanhe o Dia a Dia dos Alunos
             </p>
           </div>
-          <p className="text-xs text-slate-200">
+          <p className="text-xs text-slate-200 leading-relaxed">
             Fotos, vídeos das atividades pedagógicas, datas comemorativas, projetos de ciências e momentos de pura alegria escolar.
           </p>
         </div>
       </div>
 
-      {/* Interactive Highlights Preview */}
+      {/* Interactive Highlights Preview without truncation */}
       <div className="grid grid-cols-2 gap-2.5">
         {INSTAGRAM_HIGHLIGHTS.map((item, index) => (
           <div 
@@ -56,8 +56,8 @@ export const InstagramSection: React.FC = () => {
             className="p-3 rounded-xl bg-gradient-to-br from-blue-950/70 to-blue-900/40 border border-white/10 hover:border-rose-400/40 transition-colors shadow-sm"
           >
             <div className="text-xl mb-1">{item.emoji}</div>
-            <p className="text-xs font-semibold text-white">{item.tag}</p>
-            <p className="text-[11px] text-slate-300 line-clamp-1">{item.desc}</p>
+            <p className="text-xs font-semibold text-white leading-snug">{item.tag}</p>
+            <p className="text-[11px] text-slate-300 leading-snug mt-0.5">{item.desc}</p>
           </div>
         ))}
       </div>
@@ -67,7 +67,7 @@ export const InstagramSection: React.FC = () => {
         href={SCHOOL_INFO.instagramUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-full py-4 px-6 rounded-2xl btn-3d-instagram flex items-center justify-between gap-4 transition-transform cursor-pointer group"
+        className="w-full py-4 px-6 rounded-2xl btn-3d-instagram flex items-center justify-between gap-4 transition-transform cursor-pointer group shadow-xl"
       >
         <div className="flex items-center gap-3.5">
           {/* 3D High Relief Instagram Icon with shine */}

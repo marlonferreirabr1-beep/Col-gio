@@ -29,9 +29,9 @@ export const SCHOOL_INFO = {
   instagramUrl: "https://www.instagram.com/colegiosantaterezadasrosas?stkn=OHp1bzI0MjNhemdu",
   mapsUrl: "https://maps.app.goo.gl/o5VtAzwK1wASA1yX9?g_st=ac",
   googleReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJv2LjI9RHAQcRtS4gsKT-aqI",
-  address: "Rua do Colégio Santa Tereza das Rosas",
-  city: "Brasil",
-  phoneDisplay: "(WhatsApp Oficial)",
+  address: "Rua Cel. Paranhos - Jacintinho, Maceió - AL",
+  city: "Maceió - AL",
+  phoneDisplay: "(82) 98824-4977",
   email: "contato@santaterezadasrosas.com.br",
   hours: "Segunda a Sexta: 07h00 às 18h00"
 };
@@ -49,59 +49,59 @@ export const WHY_CHOOSE_US: SchoolFeature[] = [
     icon: "💙",
     title: "Ambiente acolhedor",
     subtitle: "Segurança afetiva e respeito à infância",
-    description: "Espaço humanizado, planejado para que cada criança sinta pertencimento, carinho e segurança diária. Acreditamos que o aprendizado floresce quando o aluno se sente protegido e amado.",
+    description: "Espaço humanizado onde cada criança é ouvida, respeitada e estimulada a florescer com segurança emocional.",
     points: [
-      "Espaços lúdicos e aconchegantes",
-      "Professores e monitores afetuosos e atentos",
-      "Adaptação escolar com suporte emocional à família"
+      "Espaços lúdicos e acolhedores",
+      "Professores afetuosos e atentos",
+      "Apoio emocional na adaptação"
     ]
   },
   {
     id: "educacao-infantil-fundamental",
     icon: "📚",
-    title: "Educação Infantil e Ensino Fundamental 1",
-    subtitle: "Continuidade pedagógica consistente e sólida",
-    description: "Do despertar da curiosidade nos primeiros passos até a consolidação do raciocínio crítico e científico. Formação curricular moderna alinhada às melhores práticas contemporâneas.",
+    title: "Educação Infantil e Fundamental 1",
+    subtitle: "Base sólida da alfabetização ao 5º ano",
+    description: "Currículo moderno e estruturado, estimulando a curiosidade e o raciocínio em cada fase do aprendizado.",
     points: [
-      "Alfabetização estruturada e com significado",
-      "Desenvolvimento de projetos interdisciplinares",
-      "Transição suave e segura entre os ciclos escolares"
+      "Alfabetização com significado",
+      "Projetos interdisciplinares",
+      "Transição segura entre ciclos"
     ]
   },
   {
     id: "acompanhamento-individualizado",
     icon: "🎯",
-    title: "Ensino com acompanhamento individualizado",
-    subtitle: "Cada aluno em seu ritmo único de excelência",
-    description: "Turmas com número controlado para garantir que a equipe pedagógica conheça detalhadamente as potencialidades, desafios e evolução de cada estudante.",
+    title: "Acompanhamento individualizado",
+    subtitle: "Olhar atento ao ritmo de cada criança",
+    description: "Turmas com número planejado para apoiar de perto o desenvolvimento e o potencial de cada estudante.",
     points: [
-      "Monitoramento contínuo da evolução acadêmica",
-      "Intervenções pedagógicas personalizadas",
-      "Relatórios de desenvolvimento transparentes aos pais"
+      "Evolução acadêmica contínua",
+      "Intervenções personalizadas",
+      "Retorno constante aos pais"
     ]
   },
   {
     id: "desenvolvimento-intelectual-humano",
     icon: "🌱",
     title: "Desenvolvimento intelectual e humano",
-    subtitle: "Conhecimento aliado a valores e ética para a vida",
-    description: "Não apenas preparamos mentes brilhantes, mas corações empáticos. Cultivamos a gentileza, a cooperação, o pensamento autônomo e o compromisso social.",
+    subtitle: "Conhecimento aliado a valores e ética",
+    description: "Formação completa que une aprendizado forte, inteligência socioemocional, empatia e cidadania.",
     points: [
-      "Habilidades socioemocionais no cotidiano escolar",
-      "Estímulo à leitura, criatividade e reflexão",
-      "Práticas que fortalecem valores morais e cidadania"
+      "Habilidades socioemocionais",
+      "Estímulo à leitura e criatividade",
+      "Valores morais e respeito"
     ]
   },
   {
     id: "parceria-escola-familia",
     icon: "🤝",
     title: "Parceria entre escola e família",
-    subtitle: "Caminhando juntos pelo futuro do seu filho",
-    description: "Portas sempre abertas para o diálogo. Acreditamos na sintonia viva e constante entre a casa e a escola como alicerce indispensável para o sucesso da criança.",
+    subtitle: "Diálogo aberto e colaboração diária",
+    description: "Comunicação transparente e acolhedora, integrando pais e educadores no crescimento dos alunos.",
     points: [
-      "Comunicação direta, ágil e acolhedora",
-      "Reuniões pedagógicas e atendimentos individualizados",
-      "Eventos e celebrações que integram toda a família"
+      "Atendimento próximo e ágil",
+      "Reuniões pedagógicas periódicas",
+      "Família integrada à rotina"
     ]
   }
 ];
@@ -146,12 +146,12 @@ export const INSTAGRAM_HIGHLIGHTS = [
   },
   {
     tag: "Ciência & Leitura",
-    desc: "Despertando a paixão pelos livros e descobertas",
+    desc: "Descobertas e paixão pelos livros",
     emoji: "🔬"
   },
   {
     tag: "Recreio & Esportes",
-    desc: "Amizades, brincadeiras saudáveis e convivência",
+    desc: "Amizades e convivência saudável",
     emoji: "⚽"
   }
 ];

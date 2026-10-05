@@ -1,17 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SCHOOL_INFO } from '../data/schoolData';
 import { ThreeDGoogleMapsIcon } from './ThreeDIcons';
-import { MapPin, Navigation, Copy, Check, Car, Shield } from 'lucide-react';
+import { MapPin, Navigation, Car, Shield, ExternalLink } from 'lucide-react';
+
+const MAP_SCREENSHOT_IMG = "https://i.postimg.cc/639wNw82/Screenshot-20261005-163542-Maps.png";
 
 export const LocationSection: React.FC = () => {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopyAddress = () => {
-    navigator.clipboard.writeText("Colégio Santa Tereza das Rosas");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2200);
-  };
-
   return (
     <section id="localizacao" className="py-10 px-4 max-w-xl mx-auto space-y-5">
       {/* Header */}
@@ -28,35 +22,46 @@ export const LocationSection: React.FC = () => {
         </p>
       </div>
 
-      {/* Modern Card with Map Graphic Preview & 3D Google Maps Badge */}
-      <div className="glass-panel rounded-2xl overflow-hidden p-5 space-y-4 border border-blue-400/25">
-        {/* Interactive Map Visual Graphic */}
-        <div className="relative h-44 rounded-xl overflow-hidden border border-blue-400/20 bg-[#091b3e] flex items-center justify-center group">
-          {/* Subtle stylized vector map grid lines */}
-          <div className="absolute inset-0 opacity-30 bg-[linear-gradient(to_right,#3b82f615_1px,transparent_1px),linear-gradient(to_bottom,#3b82f615_1px,transparent_1px)] bg-[size:24px_24px]" />
-          
-          {/* Stylized route path */}
-          <svg className="absolute inset-0 w-full h-full opacity-40 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 20,140 Q 120,60 220,90 T 380,40" fill="none" stroke="#60a5fa" strokeWidth="4" strokeDasharray="6 6" />
-            <path d="M 60,160 Q 180,120 280,100" fill="none" stroke="#f59e0b" strokeWidth="3" />
-          </svg>
+      {/* Modern Card with Google Maps Real Image & 3D Pulsing Pin */}
+      <div className="glass-panel rounded-2xl overflow-hidden p-4 sm:p-5 space-y-4 border border-blue-400/25 shadow-xl">
+        {/* Real Map Image Container with 3D Pulsing Red Marker */}
+        <a
+          href={SCHOOL_INFO.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative block rounded-xl overflow-hidden border border-blue-400/30 bg-[#091b3e] shadow-lg group cursor-pointer aspect-[1080/704] w-full"
+          title="Abrir no Google Maps"
+        >
+          {/* Official Maps Screenshot */}
+          <img
+            src={MAP_SCREENSHOT_IMG}
+            alt="Localização no Google Maps - Colégio Santa Tereza das Rosas"
+            className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
+            referrerPolicy="no-referrer"
+            loading="lazy"
+          />
 
-          {/* Central 3D Pin & Pulse */}
-          <div className="relative flex flex-col items-center z-10">
-            <span className="relative flex h-14 w-14 items-center justify-center">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-30"></span>
-              <ThreeDGoogleMapsIcon size={48} className="transform hover:scale-110 cursor-pointer shadow-xl" />
+          {/* 3D Pulsing Red Pin Effect positioned directly on the red map pin */}
+          <div className="absolute top-[47.7%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none flex flex-col items-center">
+            {/* Multiple expanding radar pulses */}
+            <span className="relative flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75 duration-1000"></span>
+              <span className="animate-pulse absolute inline-flex h-8 w-8 rounded-full bg-red-500/40 blur-sm"></span>
+              
+              {/* 3D High-Relief Red Pin Marker */}
+              <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-rose-400 via-red-600 to-red-800 shadow-[0_8px_16px_rgba(239,68,68,0.7),inset_0_2px_3px_rgba(255,255,255,0.9),inset_0_-2px_4px_rgba(0,0,0,0.5)] border-2 border-white flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                <div className="absolute top-0.5 left-1 right-1 h-2.5 rounded-t-full bg-gradient-to-b from-white/70 to-transparent pointer-events-none" />
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.7)] fill-white" />
+              </div>
             </span>
-            <div className="mt-2 px-3 py-1 rounded-full bg-blue-950/90 border border-amber-400/40 text-[11px] font-bold text-amber-300 shadow-md">
-              Colégio Santa Tereza das Rosas
-            </div>
           </div>
 
-          {/* Map corner badge */}
-          <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-md bg-blue-950/80 backdrop-blur-sm border border-white/10 text-[10px] text-slate-300">
-            Google Maps
+          {/* Top Corner Map Badge */}
+          <div className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-blue-950/90 backdrop-blur-md border border-white/20 text-[11px] text-slate-200 font-medium flex items-center gap-1.5 shadow-md">
+            <span>Google Maps</span>
+            <ExternalLink className="w-3 h-3 text-amber-300" />
           </div>
-        </div>
+        </a>
 
         {/* Location Amenities */}
         <div className="grid grid-cols-2 gap-2 text-xs">
@@ -69,30 +74,6 @@ export const LocationSection: React.FC = () => {
             <span className="truncate">Portaria monitorada</span>
           </div>
         </div>
-
-        {/* Copy Address Action */}
-        <div className="pt-1 flex items-center justify-between text-xs text-slate-300 bg-blue-950/60 p-2.5 rounded-xl border border-white/10">
-          <div className="flex items-center gap-2 truncate">
-            <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
-            <span className="font-medium text-white truncate">Colégio Santa Tereza das Rosas</span>
-          </div>
-          <button
-            onClick={handleCopyAddress}
-            className="px-2.5 py-1 rounded-lg bg-blue-800/80 hover:bg-blue-700 text-amber-300 text-[11px] font-semibold flex items-center gap-1 shrink-0 transition-colors cursor-pointer"
-          >
-            {copied ? (
-              <>
-                <Check className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Copiado!</span>
-              </>
-            ) : (
-              <>
-                <Copy className="w-3.5 h-3.5" />
-                <span>Copiar</span>
-              </>
-            )}
-          </button>
-        </div>
       </div>
 
       {/* Main Button: 📍 Como chegar ao colégio */}
@@ -100,7 +81,7 @@ export const LocationSection: React.FC = () => {
         href={SCHOOL_INFO.mapsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-full py-4 px-6 rounded-2xl btn-3d-maps flex items-center justify-between gap-4 transition-transform cursor-pointer group"
+        className="w-full py-4 px-6 rounded-2xl btn-3d-maps flex items-center justify-between gap-4 transition-transform cursor-pointer group shadow-xl"
         aria-label="Abrir rota no Google Maps"
       >
         <div className="flex items-center gap-3.5">
