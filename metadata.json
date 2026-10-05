@@ -1,0 +1,6 @@
+{
+  "name": "Colégio Santa Tereza das Rosas | Bio Oficial",
+  "description": "Bio oficial do Colégio Santa Tereza das Rosas. Educação Infantil e Ensino Fundamental de alto padrão. Desde 1993 educando com excelência.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
