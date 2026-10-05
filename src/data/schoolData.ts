@@ -23,7 +23,7 @@ export const SCHOOL_INFO = {
   segments: "Educação Infantil ao Ensino Fundamental 1",
   motto: "💛 Desde 1993 educando com excelência",
   footerQuote: "Formando alunos para o futuro com conhecimento, valores e amor pela educação.",
-  logoUrl: "https://i.postimg.cc/QdzxNN4w/file-000000000474820e831e7dac4d75bf62.png",
+  logoUrl: "https://i.postimg.cc/mrTMKzyZ/file-0000000033b8820eb05e35ffaf1f464d.png",
   whatsappPhone: "5582988244977",
   whatsappUrl: "https://api.whatsapp.com/send?phone=5582988244977",
   instagramUrl: "https://www.instagram.com/colegiosantaterezadasrosas?stkn=OHp1bzI0MjNhemdu",
