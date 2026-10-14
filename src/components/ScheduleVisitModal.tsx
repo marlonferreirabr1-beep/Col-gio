@@ -12,14 +12,12 @@ export const ScheduleVisitModal: React.FC<ScheduleVisitModalProps> = ({ isOpen, 
   const [parentName, setParentName] = useState('');
   const [studentInfo, setStudentInfo] = useState('');
   const [segment, setSegment] = useState<'infantil' | 'fundamental'>('infantil');
-  const [shift, setShift] = useState<'manha' | 'tarde'>('manha');
   const [preferredDate, setPreferredDate] = useState('');
   const [copied, setCopied] = useState(false);
 
   if (!isOpen) return null;
 
   const segmentLabel = segment === 'infantil' ? 'Educação Infantil' : 'Ensino Fundamental 1';
-  const shiftLabel = shift === 'manha' ? 'Manhã' : 'Tarde';
 
   // Format date nicely if selected
   const formattedDate = preferredDate
@@ -42,7 +40,7 @@ ${parentGreeting}${childPhrase}
 
 Gostaria de agendar uma visita pedagógica e obter informações sobre as Matrículas 2026:
 • Ciclo: ${segmentLabel}
-• Turno de preferência: ${shiftLabel}
+• Turno: Tarde (Vespertino)
 • Data sugerida para visita: ${formattedDate}
 
 Poderiam me informar os horários disponíveis para nos receber? Agradeço desde já pela atenção!`;
@@ -171,36 +169,19 @@ Poderiam me informar os horários disponíveis para nos receber? Agradeço desde
             </div>
           </div>
 
-          {/* Shift Selector */}
+          {/* Turno - Somente Tarde (Vespertino) */}
           <div>
             <label className="block font-semibold text-slate-200 mb-1">
-              Turno de Preferência
+              Turno de Funcionamento
             </label>
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => setShift('manha')}
-                className={`py-2 px-3 rounded-xl border text-xs font-semibold cursor-pointer transition-all flex items-center justify-center gap-1.5 ${
-                  shift === 'manha'
-                    ? 'bg-blue-600 text-white border-blue-400 shadow-sm'
-                    : 'bg-blue-950/60 border-white/10 text-slate-300 hover:text-white'
-                }`}
-              >
-                <Clock className="w-3.5 h-3.5" />
-                <span>Manhã</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setShift('tarde')}
-                className={`py-2 px-3 rounded-xl border text-xs font-semibold cursor-pointer transition-all flex items-center justify-center gap-1.5 ${
-                  shift === 'tarde'
-                    ? 'bg-blue-600 text-white border-blue-400 shadow-sm'
-                    : 'bg-blue-950/60 border-white/10 text-slate-300 hover:text-white'
-                }`}
-              >
-                <Clock className="w-3.5 h-3.5" />
-                <span>Tarde</span>
-              </button>
+            <div className="flex items-center gap-2 p-2.5 rounded-xl bg-blue-900/50 border border-amber-400/30 text-slate-100">
+              <Clock className="w-4 h-4 text-amber-400 shrink-0" />
+              <div className="flex items-center justify-between w-full">
+                <span className="font-semibold text-xs">Turno da Tarde (Vespertino)</span>
+                <span className="text-[10px] bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded-md font-medium border border-amber-400/30">
+                  Horário Oficial
+                </span>
+              </div>
             </div>
           </div>
 
