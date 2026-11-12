@@ -5,7 +5,7 @@ export const HoursSection: React.FC = () => {
   const [isOpenNow, setIsOpenNow] = useState(true);
 
   useEffect(() => {
-    // Check Brazilian business hours (Mon-Fri 07:00 to 18:00 America/Sao_Paulo)
+    // Check Brazilian business hours (Mon-Fri 13:00 to 17:30 America/Sao_Paulo)
     const checkOpenStatus = () => {
       try {
         const now = new Date();
@@ -13,10 +13,12 @@ export const HoursSection: React.FC = () => {
         const brDate = new Date(brTimeStr);
         const day = brDate.getDay(); // 0 is Sunday, 6 is Saturday
         const hour = brDate.getHours();
+        const minutes = brDate.getMinutes();
+        const totalMinutes = hour * 60 + minutes;
         
-        // Open Mon-Fri between 7am and 18pm
+        // Open Mon-Fri between 13:00 (780 min) and 17:30 (1050 min)
         const isWeekday = day >= 1 && day <= 5;
-        const isBusinessHour = hour >= 7 && hour < 18;
+        const isBusinessHour = totalMinutes >= 13 * 60 && totalMinutes < 17 * 60 + 30;
         setIsOpenNow(isWeekday && isBusinessHour);
       } catch {
         setIsOpenNow(true);
@@ -29,11 +31,11 @@ export const HoursSection: React.FC = () => {
   }, []);
 
   const scheduleList = [
-    { day: "Segunda-feira", hours: "07:00 – 18:00", open: true },
-    { day: "Terça-feira", hours: "07:00 – 18:00", open: true },
-    { day: "Quarta-feira", hours: "07:00 – 18:00", open: true },
-    { day: "Quinta-feira", hours: "07:00 – 18:00", open: true },
-    { day: "Sexta-feira", hours: "07:00 – 18:00", open: true },
+    { day: "Segunda-feira", hours: "13:00 – 17:30", open: true },
+    { day: "Terça-feira", hours: "13:00 – 17:30", open: true },
+    { day: "Quarta-feira", hours: "13:00 – 17:30", open: true },
+    { day: "Quinta-feira", hours: "13:00 – 17:30", open: true },
+    { day: "Sexta-feira", hours: "13:00 – 17:30", open: true },
     { day: "Sábado", hours: "Fechado", open: false },
     { day: "Domingo", hours: "Fechado", open: false },
   ];
@@ -75,7 +77,7 @@ export const HoursSection: React.FC = () => {
                 {isOpenNow ? "Aberto agora" : "Fechado no momento"}
               </p>
               <p className="text-xs text-slate-300">
-                {isOpenNow ? "Atendimento presencial e online até as 18:00" : "Abertura de segunda a sexta às 07:00"}
+                {isOpenNow ? "Atendimento presencial e online até as 17:30" : "Abertura de segunda a sexta às 13:00"}
               </p>
             </div>
           </div>

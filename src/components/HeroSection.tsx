@@ -1,15 +1,41 @@
-import React from 'react';
-import { SCHOOL_INFO } from '../data/schoolData';
+import React, { useRef, useState, useEffect } from 'react';
+import { SCHOOL_INFO, SCHOOL_PHOTOS } from '../data/schoolData';
 import { ThreeDWhatsAppIcon } from './ThreeDIcons';
-import { Sparkles, ChevronDown } from 'lucide-react';
+import { Sparkles, ChevronDown, ChevronLeft, ChevronRight, Camera, MoveHorizontal } from 'lucide-react';
 
 interface HeroSectionProps {
   onFaleConosco: () => void;
 }
 
-const INSTAGRAM_BANNER_IMG = "https://i.postimg.cc/gkrLd0m7/Screenshot-20261005-134043-Instagram.png";
-
 export const HeroSection: React.FC<HeroSectionProps> = ({ onFaleConosco }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Update current indicator based on scroll position
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, clientWidth } = scrollRef.current;
+    if (clientWidth > 0) {
+      const idx = Math.round(scrollLeft / clientWidth);
+      setCurrentIndex(Math.min(Math.max(idx, 0), SCHOOL_PHOTOS.length - 1));
+    }
+  };
+
+  const scrollToIndex = (idx: number) => {
+    if (!scrollRef.current) return;
+    const targetLeft = idx * scrollRef.current.clientWidth;
+    scrollRef.current.scrollTo({ left: targetLeft, behavior: 'smooth' });
+    setCurrentIndex(idx);
+  };
+
+  const handlePrev = () => {
+    scrollToIndex(Math.max(currentIndex - 1, 0));
+  };
+
+  const handleNext = () => {
+    scrollToIndex(Math.min(currentIndex + 1, SCHOOL_PHOTOS.length - 1));
+  };
+
   return (
     <section 
       id="inicio"
@@ -72,22 +98,105 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onFaleConosco }) => {
         </div>
       </div>
 
-      {/* Imagem de Matrículas Abertas */}
-      <div className="w-full max-w-md mx-auto mt-4 mb-4">
-        <div className="relative rounded-2xl overflow-hidden border border-amber-400/35 bg-blue-950/60 shadow-2xl shadow-black/70 group">
-          <img
-            src={INSTAGRAM_BANNER_IMG}
-            alt="Matrículas Abertas - Colégio Santa Tereza das Rosas"
-            className="w-full h-auto object-cover rounded-2xl transition-transform duration-500 group-hover:scale-[1.01]"
-            referrerPolicy="no-referrer"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10 pointer-events-none" />
+      {/* Carrossel: Conheça nosso colégio (Fotos reais em sequência) */}
+      <div className="w-full max-w-md mx-auto mt-5 mb-4 text-left">
+        {/* Header do Carrossel */}
+        <div className="flex items-center justify-between px-1 mb-2.5">
+          <div className="flex items-center gap-2">
+            <span className="p-1.5 rounded-lg bg-amber-400/15 border border-amber-400/30 text-amber-300 flex items-center justify-center">
+              <Camera className="w-4 h-4 text-amber-400" />
+            </span>
+            <div>
+              <h2 className="text-sm sm:text-base font-bold text-white tracking-tight leading-tight">
+                Conheça nosso colégio
+              </h2>
+              <p className="text-[11px] text-slate-300 flex items-center gap-1">
+                <span>Deslize para ver as fotos</span>
+                <MoveHorizontal className="w-3 h-3 text-amber-400 inline" />
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1 text-xs font-semibold text-amber-300 bg-blue-950/80 px-2.5 py-1 rounded-full border border-amber-400/30">
+            <span>{currentIndex + 1}</span>
+            <span className="text-slate-400">/</span>
+            <span className="text-slate-400">{SCHOOL_PHOTOS.length}</span>
+          </div>
+        </div>
+
+        {/* Carrossel Container com Snap Horizontal */}
+        <div className="relative rounded-2xl overflow-hidden border border-amber-400/35 bg-blue-950/70 shadow-2xl shadow-black/80 group">
+          {/* Track Horizontal */}
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none scroll-smooth touch-pan-x"
+            style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch',
+            }}
+          >
+            {SCHOOL_PHOTOS.map((photo, index) => (
+              <div
+                key={photo.id}
+                className="w-full shrink-0 snap-center snap-always flex flex-col items-center justify-center bg-[#05112a]"
+              >
+                {/* Imagem em tamanho real mantendo suas proporções completas */}
+                <div className="w-full flex items-center justify-center bg-black/40">
+                  <img
+                    src={photo.url}
+                    alt={`Foto ${index + 1} do Colégio Santa Tereza das Rosas`}
+                    className="w-full h-auto max-h-[540px] object-contain select-none"
+                    referrerPolicy="no-referrer"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Botões de Navegação Lateral (Desktop / Tablets / Mobile Touch) */}
+          {currentIndex > 0 && (
+            <button
+              onClick={handlePrev}
+              aria-label="Foto anterior"
+              className="absolute left-2 top-1/2 -translate-y-8 w-9 h-9 rounded-full bg-blue-950/85 hover:bg-amber-400 text-white hover:text-blue-950 border border-amber-400/40 flex items-center justify-center transition-all shadow-lg active:scale-90 cursor-pointer backdrop-blur-sm"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+          )}
+
+          {currentIndex < SCHOOL_PHOTOS.length - 1 && (
+            <button
+              onClick={handleNext}
+              aria-label="Próxima foto"
+              className="absolute right-2 top-1/2 -translate-y-8 w-9 h-9 rounded-full bg-blue-950/85 hover:bg-amber-400 text-white hover:text-blue-950 border border-amber-400/40 flex items-center justify-center transition-all shadow-lg active:scale-90 cursor-pointer backdrop-blur-sm"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          )}
+        </div>
+
+        {/* Indicadores de bolinhas clicáveis */}
+        <div className="flex items-center justify-center gap-1.5 mt-2.5">
+          {SCHOOL_PHOTOS.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => scrollToIndex(idx)}
+              aria-label={`Ir para foto ${idx + 1}`}
+              className={`h-2 rounded-full transition-all cursor-pointer ${
+                currentIndex === idx
+                  ? 'w-6 bg-amber-400 shadow-sm shadow-amber-400/50'
+                  : 'w-2 bg-blue-800/80 hover:bg-blue-600'
+              }`}
+            />
+          ))}
         </div>
       </div>
 
-      {/* CTA Button: Fale Conosco posicionado LOGO ABAIXO da imagem */}
-      <div className="w-full max-w-sm mx-auto space-y-4">
+      {/* CTA Button: Fale Conosco posicionado LOGO ABAIXO do carrossel */}
+      <div className="w-full max-w-sm mx-auto space-y-4 pt-1">
         <button
           onClick={onFaleConosco}
           className="w-full py-4 px-6 rounded-2xl text-base sm:text-lg font-bold text-blue-950 btn-3d-gold flex items-center justify-center gap-3 transition-transform cursor-pointer group shadow-xl"

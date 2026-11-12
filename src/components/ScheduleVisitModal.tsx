@@ -1,23 +1,36 @@
 import React, { useState } from 'react';
 import { SCHOOL_INFO, getWhatsAppDirectUrl } from '../data/schoolData';
 import { ThreeDWhatsAppIcon } from './ThreeDIcons';
-import { X, Calendar, Clock, User, Sparkles, CheckCircle2, MessageSquareText, Copy, Check } from 'lucide-react';
+import { X, Calendar, Clock, User, Sparkles, CheckCircle2, MessageSquareText, Copy, Check, GraduationCap, ChevronDown } from 'lucide-react';
 
 interface ScheduleVisitModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+const EDUCATION_LEVELS = [
+  { id: 'socializacao-2', label: 'Socialização / 2 anos', group: 'Educação Infantil' },
+  { id: 'periodo-1-3', label: '1º Período / 3 anos', group: 'Educação Infantil' },
+  { id: 'periodo-2-4', label: '2º Período / 4 anos', group: 'Educação Infantil' },
+  { id: 'periodo-3-5', label: '3º Período / 5 anos', group: 'Educação Infantil' },
+  { id: 'ano-1-6', label: '1º Ano / 6 anos', group: 'Ensino Fundamental 1' },
+  { id: 'ano-2-7', label: '2º Ano / 7 anos', group: 'Ensino Fundamental 1' },
+  { id: 'ano-3-8', label: '3º Ano / 8 anos', group: 'Ensino Fundamental 1' },
+  { id: 'ano-4-9', label: '4º Ano / 9 anos', group: 'Ensino Fundamental 1' },
+  { id: 'ano-5-10', label: '5º Ano / 10 anos', group: 'Ensino Fundamental 1' },
+];
+
 export const ScheduleVisitModal: React.FC<ScheduleVisitModalProps> = ({ isOpen, onClose }) => {
   const [parentName, setParentName] = useState('');
   const [studentInfo, setStudentInfo] = useState('');
-  const [segment, setSegment] = useState<'infantil' | 'fundamental'>('infantil');
+  const [selectedLevelId, setSelectedLevelId] = useState('socializacao-2');
+  const [isLevelMenuOpen, setIsLevelMenuOpen] = useState(false);
   const [preferredDate, setPreferredDate] = useState('');
   const [copied, setCopied] = useState(false);
 
   if (!isOpen) return null;
 
-  const segmentLabel = segment === 'infantil' ? 'Educação Infantil' : 'Ensino Fundamental 1';
+  const currentLevel = EDUCATION_LEVELS.find(l => l.id === selectedLevelId) || EDUCATION_LEVELS[0];
 
   // Format date nicely if selected
   const formattedDate = preferredDate
@@ -39,7 +52,7 @@ export const ScheduleVisitModal: React.FC<ScheduleVisitModalProps> = ({ isOpen, 
 ${parentGreeting}${childPhrase}
 
 Gostaria de agendar uma visita pedagógica e obter informações sobre as Matrículas 2026:
-• Ciclo: ${segmentLabel}
+• Turma / Ciclo: ${currentLevel.label} (${currentLevel.group})
 • Turno: Tarde (Vespertino)
 • Data sugerida para visita: ${formattedDate}
 
@@ -59,10 +72,15 @@ Poderiam me informar os horários disponíveis para nos receber? Agradeço desde
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleSelectLevel = (levelId: string) => {
+    setSelectedLevelId(levelId);
+    setIsLevelMenuOpen(false);
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
       <div 
-        className="relative w-full max-w-lg bg-gradient-to-b from-[#0a204d] via-[#061638] to-[#040e24] border border-amber-400/40 rounded-3xl p-5 sm:p-6 shadow-2xl shadow-black text-slate-100 my-auto"
+        className="relative w-full max-w-lg bg-gradient-to-b from-[#0a204d] via-[#061638] to-[#040e24] border border-amber-400/40 rounded-3xl p-5 sm:p-6 shadow-2xl shadow-black text-slate-100 my-auto max-h-[94vh] flex flex-col"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
@@ -71,13 +89,13 @@ Poderiam me informar os horários disponíveis para nos receber? Agradeço desde
         <button
           onClick={onClose}
           aria-label="Fechar janela"
-          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-blue-900/60 text-slate-300 hover:text-white flex items-center justify-center border border-white/10 cursor-pointer"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-blue-900/60 text-slate-300 hover:text-white flex items-center justify-center border border-white/10 cursor-pointer z-10"
         >
           <X className="w-4 h-4" />
         </button>
 
         {/* Modal Header */}
-        <div className="text-center space-y-1 mb-4">
+        <div className="text-center space-y-1 mb-3 shrink-0">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/30 text-xs font-semibold">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             <span>Portas Abertas</span>
@@ -86,12 +104,12 @@ Poderiam me informar os horários disponíveis para nos receber? Agradeço desde
             Agendar Visita Pedagógica
           </h3>
           <p className="text-xs text-slate-300">
-            Preencha os campos abaixo. A mensagem já chegará pronta e digitada no WhatsApp da escola!
+            Selecione a turma de interesse e confirme direto pelo WhatsApp oficial.
           </p>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-3.5 text-xs">
+        {/* Form com Scrollbar suave */}
+        <form onSubmit={handleSubmit} className="space-y-3.5 text-xs overflow-y-auto pr-1">
           <div>
             <label className="block font-semibold text-slate-200 mb-1">
               Nome do Responsável
@@ -138,34 +156,78 @@ Poderiam me informar os horários disponíveis para nos receber? Agradeço desde
             </div>
           </div>
 
-          {/* Segment Selector */}
+          {/* Ciclo / Turma de Ensino - Dropdown Acordeão com Setinha */}
           <div>
-            <label className="block font-semibold text-slate-200 mb-1">
-              Ciclo de Ensino
+            <label className="block font-semibold text-slate-200 mb-1 flex items-center gap-1.5">
+              <GraduationCap className="w-3.5 h-3.5 text-amber-400" />
+              <span>Ciclo de Ensino / Turma</span>
             </label>
-            <div className="grid grid-cols-2 gap-2">
+
+            {/* Botão com Setinha para abrir/fechar as opções */}
+            <div className="relative">
               <button
                 type="button"
-                onClick={() => setSegment('infantil')}
-                className={`py-2 px-3 rounded-xl border text-xs font-semibold cursor-pointer transition-all ${
-                  segment === 'infantil'
-                    ? 'bg-amber-400 text-blue-950 border-amber-300 shadow-sm'
-                    : 'bg-blue-950/60 border-white/10 text-slate-300 hover:text-white'
+                onClick={() => setIsLevelMenuOpen(!isLevelMenuOpen)}
+                className={`w-full py-2.5 px-3.5 rounded-xl border text-xs font-semibold cursor-pointer transition-all flex items-center justify-between gap-2 ${
+                  isLevelMenuOpen
+                    ? 'bg-blue-900/80 border-amber-400 text-white shadow-md shadow-amber-400/10'
+                    : 'bg-blue-950/80 border-blue-400/30 text-white hover:border-amber-400/50 hover:bg-blue-900/40'
                 }`}
+                aria-expanded={isLevelMenuOpen}
+                aria-label="Abrir opções de Ciclo de Ensino / Turma"
               >
-                Educação Infantil
+                <div className="flex items-center gap-2 truncate">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
+                  <span className="font-bold text-amber-300 truncate">
+                    {currentLevel.label}
+                  </span>
+                  <span className="text-[10px] text-slate-300 font-normal truncate hidden sm:inline">
+                    · {currentLevel.group}
+                  </span>
+                </div>
+
+                {/* Setinha animada que gira ao abrir */}
+                <div className={`w-6 h-6 rounded-lg bg-blue-950/80 flex items-center justify-center text-amber-300 border border-white/10 shrink-0 transition-transform duration-200 ${isLevelMenuOpen ? 'rotate-180 text-amber-400 bg-amber-400/20' : ''}`}>
+                  <ChevronDown className="w-4 h-4" />
+                </div>
               </button>
-              <button
-                type="button"
-                onClick={() => setSegment('fundamental')}
-                className={`py-2 px-3 rounded-xl border text-xs font-semibold cursor-pointer transition-all ${
-                  segment === 'fundamental'
-                    ? 'bg-amber-400 text-blue-950 border-amber-300 shadow-sm'
-                    : 'bg-blue-950/60 border-white/10 text-slate-300 hover:text-white'
-                }`}
-              >
-                Ensino Fundamental 1
-              </button>
+
+              {/* Lista suspensa de opções revelada ao apertar na setinha */}
+              {isLevelMenuOpen && (
+                <div className="mt-1.5 p-1.5 rounded-2xl bg-[#05112a] border border-amber-400/40 shadow-2xl space-y-1 animate-in fade-in zoom-in-95 duration-150 z-20">
+                  <div className="px-2.5 py-1 text-[10px] uppercase font-bold text-amber-400/80 tracking-wider">
+                    Selecione a turma desejada:
+                  </div>
+
+                  <div className="space-y-1 max-h-56 overflow-y-auto pr-1">
+                    {EDUCATION_LEVELS.map((lvl) => {
+                      const isSelected = selectedLevelId === lvl.id;
+                      return (
+                        <button
+                          key={lvl.id}
+                          type="button"
+                          onClick={() => handleSelectLevel(lvl.id)}
+                          className={`w-full p-2.5 rounded-xl border text-xs font-semibold cursor-pointer transition-all text-left flex items-center justify-between gap-2 ${
+                            isSelected
+                              ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-blue-950 border-amber-300 shadow-md font-bold'
+                              : 'bg-blue-950/60 border-white/5 text-slate-200 hover:text-white hover:border-amber-400/40 hover:bg-blue-900/60'
+                          }`}
+                        >
+                          <div className="flex flex-col">
+                            <span className="font-semibold">{lvl.label}</span>
+                            <span className={`text-[10px] ${isSelected ? 'text-blue-950/80 font-medium' : 'text-slate-400'}`}>
+                              {lvl.group}
+                            </span>
+                          </div>
+                          {isSelected && (
+                            <CheckCircle2 className="w-4 h-4 text-blue-950 shrink-0" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -179,7 +241,7 @@ Poderiam me informar os horários disponíveis para nos receber? Agradeço desde
               <div className="flex items-center justify-between w-full">
                 <span className="font-semibold text-xs">Turno da Tarde (Vespertino)</span>
                 <span className="text-[10px] bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded-md font-medium border border-amber-400/30">
-                  Horário Oficial
+                  Horário Oficial: 13:00 às 17:30
                 </span>
               </div>
             </div>
@@ -216,7 +278,7 @@ Poderiam me informar os horários disponíveis para nos receber? Agradeço desde
           </button>
         </form>
 
-        <p className="text-[10px] text-center text-slate-400 mt-2.5 flex items-center justify-center gap-1">
+        <p className="text-[10px] text-center text-slate-400 mt-2 shrink-0 flex items-center justify-center gap-1">
           <CheckCircle2 className="w-3 h-3 text-emerald-400" />
           <span>Atendimento direto com a coordenação pedagógica via WhatsApp Oficial</span>
         </p>

@@ -33,8 +33,53 @@ export const SCHOOL_INFO = {
   city: "Maceió - AL",
   phoneDisplay: "(82) 98824-4977",
   email: "contato@santaterezadasrosas.com.br",
-  hours: "Segunda a Sexta: 07h00 às 18h00"
+  hours: "Segunda a Sexta: 13h00 às 17h30"
 };
+
+export const SCHOOL_PHOTOS = [
+  {
+    id: 1,
+    url: "https://i.postimg.cc/sDDhgndW/IMG-20261112-WA0010.jpg",
+    title: "Estrutura do Colégio",
+    description: "Espaço acolhedor e seguro para nossos alunos"
+  },
+  {
+    id: 2,
+    url: "https://i.postimg.cc/zG4bp8Lk/IMG-20261112-WA0011.jpg",
+    title: "Ambiente Escolar",
+    description: "Áreas planejadas para convivência e aprendizado"
+  },
+  {
+    id: 3,
+    url: "https://i.postimg.cc/ZRS9tHxq/IMG-20261112-WA0005.jpg",
+    title: "Salas e Atividades",
+    description: "Ambientes pedagógicos confortáveis e iluminados"
+  },
+  {
+    id: 4,
+    url: "https://i.postimg.cc/qqmgKTVK/IMG-20261112-WA0009.jpg",
+    title: "Espaço de Convivência",
+    description: "Cuidado e carinho em cada detalhe da rotina"
+  },
+  {
+    id: 5,
+    url: "https://i.postimg.cc/TY4pYfJB/IMG-20261112-WA0006.jpg",
+    title: "Área de Aprendizado",
+    description: "Estímulo à curiosidade, leitura e criatividade"
+  },
+  {
+    id: 6,
+    url: "https://i.postimg.cc/FKjRZcXt/IMG-20261112-WA0007.jpg",
+    title: "Instalações do Colégio",
+    description: "Infraestrutura acolhedora para o desenvolvimento infantil"
+  },
+  {
+    id: 7,
+    url: "https://i.postimg.cc/Y9RScHSZ/IMG-20261112-WA0008.jpg",
+    title: "Colégio Santa Tereza das Rosas",
+    description: "Formando para o futuro com conhecimento e valores"
+  }
+];
 
 export const getWhatsAppDirectUrl = (message?: string): string => {
   if (!message) {

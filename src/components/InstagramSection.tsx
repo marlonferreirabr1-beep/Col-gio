@@ -3,7 +3,7 @@ import { SCHOOL_INFO, INSTAGRAM_HIGHLIGHTS } from '../data/schoolData';
 import { ThreeDInstagramIcon } from './ThreeDIcons';
 import { ExternalLink, Camera, Sparkles } from 'lucide-react';
 
-const ACTIVITIES_IMG = "/src/assets/images/escola_atividades_1791219254079.jpg";
+const INSTAGRAM_PREVIEW_IMG = "https://i.postimg.cc/hjR1h9ct/Screenshot-20261112-062354-Instagram.png";
 
 export const InstagramSection: React.FC = () => {
   return (
@@ -27,9 +27,9 @@ export const InstagramSection: React.FC = () => {
       {/* Routine Image Card & Stories Teaser */}
       <div className="relative rounded-2xl overflow-hidden border border-rose-500/25 shadow-xl shadow-black/40 group">
         <img
-          src={ACTIVITIES_IMG}
+          src={INSTAGRAM_PREVIEW_IMG}
           alt="Rotina de aprendizado e desenvolvimento no Colégio Santa Tereza das Rosas"
-          className="w-full h-44 sm:h-52 object-cover transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-48 sm:h-56 object-cover object-top transition-transform duration-700 group-hover:scale-105"
           referrerPolicy="no-referrer"
           onError={(e) => {
             (e.target as HTMLElement).style.display = 'none';
