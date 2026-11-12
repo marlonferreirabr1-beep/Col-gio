@@ -69,12 +69,18 @@ export const SCHOOL_PHOTOS = [
   },
   {
     id: 6,
+    url: "https://i.postimg.cc/Dy35Q72h/IMG-20261111-WA0016.jpg",
+    title: "Atividades Pedagógicas",
+    description: "Vivências enriquecedoras e momentos especiais"
+  },
+  {
+    id: 7,
     url: "https://i.postimg.cc/FKjRZcXt/IMG-20261112-WA0007.jpg",
     title: "Instalações do Colégio",
     description: "Infraestrutura acolhedora para o desenvolvimento infantil"
   },
   {
-    id: 7,
+    id: 8,
     url: "https://i.postimg.cc/Y9RScHSZ/IMG-20261112-WA0008.jpg",
     title: "Colégio Santa Tereza das Rosas",
     description: "Formando para o futuro com conhecimento e valores"
