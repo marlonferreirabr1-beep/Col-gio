@@ -51,7 +51,7 @@ export const ScheduleVisitModal: React.FC<ScheduleVisitModalProps> = ({ isOpen, 
 
 ${parentGreeting}${childPhrase}
 
-Gostaria de agendar uma visita pedagógica e obter informações sobre as Matrículas 2026:
+Gostaria de agendar uma visita pedagógica e obter informações sobre as Matrículas 2027:
 • Turma / Ciclo: ${currentLevel.label} (${currentLevel.group})
 • Turno: Tarde (Vespertino)
 • Data sugerida para visita: ${formattedDate}

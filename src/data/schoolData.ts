@@ -21,7 +21,7 @@ export const SCHOOL_INFO = {
   name: "Colégio Santa Tereza das Rosas",
   shortName: "Santa Tereza das Rosas",
   segments: "Educação Infantil ao Ensino Fundamental 1",
-  motto: "💛 Desde 1993 educando com excelência",
+  motto: "💛 Desde 1994 educando com excelência",
   footerQuote: "Formando alunos para o futuro com conhecimento, valores e amor pela educação.",
   logoUrl: "https://i.postimg.cc/mrTMKzyZ/file-0000000033b8820eb05e35ffaf1f464d.png",
   whatsappPhone: "5582988244977",

@@ -49,7 +49,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onFaleConosco }) => {
       <div className="relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-900/60 border border-amber-400/30 backdrop-blur-md shadow-sm mb-3">
         <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
         <span className="text-xs font-semibold tracking-wide text-amber-200">
-          Matrículas 2026 Abertas · Vagas Limitadas
+          Matrículas 2027 Abertas · Vagas Limitadas
         </span>
       </div>
 
