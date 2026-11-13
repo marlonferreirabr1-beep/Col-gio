@@ -69,7 +69,7 @@ export const SCHOOL_PHOTOS = [
   },
   {
     id: 6,
-    url: "https://i.postimg.cc/Dy35Q72h/IMG-20261111-WA0016.jpg",
+    url: "https://i.postimg.cc/pr0M6fbF/IMG-20261113-WA0092.jpg",
     title: "Atividades Pedagógicas",
     description: "Vivências enriquecedoras e momentos especiais"
   },
